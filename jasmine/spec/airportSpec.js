@@ -56,6 +56,10 @@ describe('airport', function () {
     it('raises error if the plane is in a different airport', function () {
       expect(function () { airport.takeOff(plane) }).toThrowError('plane is not at this airport');
     });
+    it('raises error if weather is stromy', function () {
+      weatherSpy.and.callFake(function () { return false });
+      expect(function () { airport.takeOff(plane) }).toThrowError('cannot take off in stormy weather');
+    });
 
   });
 

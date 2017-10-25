@@ -12,6 +12,7 @@ Airport.prototype.land = function (plane) {
 };
 
 Airport.prototype.takeOff = function (plane) {
+  if (this._isClear() == false) throw new Error ('cannot take off in stormy weather')  
   var index = this._planes.indexOf(plane);
   if (index === -1) throw new Error('plane is not at this airport');
   plane.takeOff();
