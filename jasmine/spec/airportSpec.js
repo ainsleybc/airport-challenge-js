@@ -1,10 +1,9 @@
 describe('airport', function () {
 
-  var airport 
-
   beforeEach(function () {
     airport = new Airport();
     plane = jasmine.createSpyObj('plane', ['land', 'takeOff']);
+    weatherSpy = spyOn(airport, '_isClear').and.callFake(function () { return true });
   });
 
   describe('planes', function () {
@@ -33,7 +32,11 @@ describe('airport', function () {
       for (var i = 0; i < 10; i++) {
         airport.land(plane);
       };
-      expect(function () { airport.land(plane) }).toThrowError('cannot land at full airport')
+      expect(function () { airport.land(plane) }).toThrowError('cannot land at full airport');
+    });
+    it('raises error if weather is stromy', function () {
+      weatherSpy.and.callFake(function () { return false });
+      expect(function () { airport.land(plane) }).toThrowError('cannot land in stormy weather');
     });
 
   });
