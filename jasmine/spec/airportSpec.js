@@ -29,6 +29,30 @@ describe('airport', function () {
       airport.land(plane);
       expect(airport.planes()).toEqual(jasmine.arrayContaining([plane]));
     });
+    it('raises an error if trying to land at a full airport', function () {
+      for (var i = 0; i < 10; i++) {
+        airport.land(plane);
+      };
+      expect(function () { airport.land(plane) }).toThrowError('cannot land at full airport')
+    });
+
+  });
+
+  describe('takeOff', function () {
+    
+    it('instructs a plane to take off from an airport', function () {
+      airport.land(plane);
+      airport.takeOff(plane);
+      expect(plane.takeOff).toHaveBeenCalled();
+    });
+    it('confirms a plane has left the airport', function () {
+      airport.land(plane);
+      airport.takeOff(plane);
+      expect(airport.planes()).not.toEqual(jasmine.arrayContaining([plane]));
+    });
+    it('raises error if the plane is in a different airport', function () {
+      expect(function () { airport.takeOff(plane) }).toThrowError('plane is not at this airport');
+    });
 
   });
 
