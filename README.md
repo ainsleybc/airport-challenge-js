@@ -14,4 +14,4 @@ Usage / Test
 ```
 open SpecRunner.html
 ```
-You can then use the browser javascript console along with the example found [here](https://github.com/ainsleybc/airport_challenge).  
+You can then use the browser javascript console along with the example usage found [here](https://github.com/ainsleybc/airport_challenge).  
